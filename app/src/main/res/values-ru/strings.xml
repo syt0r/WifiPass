@@ -30,4 +30,8 @@
     <string name="no_root">Невозможно получить root доступ</string>
     <string name="thanks">Спасибо, я ценю вашу поддержку</string>
     <string name="about_me">\tВ настоящее время студент НТУУ КПИ. Я изучаю программирование с 10 класса, это приложение было написано 2,5 года после начала обучения. В свободное время я смотрю аниме, играю на гитаре и в видео игры. Если вам нравится приложение вы можете задонатить (на новый ПК)</string>
+    <string name="small_donation">Маленький взнос</string>
+    <string name="medium_donation">Средний взнос</string>
+    <string name="large_donation">Большой взнос</string>
+    <string name="about_me_title">Обо мне</string>
 </resources>

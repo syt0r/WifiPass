@@ -32,5 +32,9 @@
     <string name="no_root">Can\'t get root access</string>
     <string name="license_key" translatable="false">MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAnpmyh0/ZOKOSzapc3cWLNPiy2Bi7XmrfFL4z2KAOIZJsaZY5QvWSr7I35RJAbtzN4Ql2H20BDUdqVsjuMllWx79FUU8WQZqxerzXQNobtlNWdgGfoTi+NfvSAoB3LJdqJNenU/W6zSrPQRnnlT3kv9qhzlgHR1KVHrLTUsVm2eS1vDdKkEtFGeaCQ5zJ689TezcBui8QrReqayK97wxraVWR7hdazuOR0G0q0iIjGhZRMmWp4IhU9J22EKzJhReio4uMy8g4EgtIVYN80e46CYuxwXnw+rZ8+WNLaefy7LCl0qFhmHVEDNG/mh5NEcnaGsutF/igTJCkdxS374MtswIDAQAB</string>
     <string name="thanks">Thanks, i appreciate your help</string>
-    <string name="about_me">\t Currently i\'m student at NTUU KPI. I learn programming since 10 grade, this app has been written 2.5 years after. At free time i watching anime, play guitar and games. If you enjoy app you could donate me some money (for new PC)</string>
+    <string name="about_me">\t Currently i\'m student at NTUU KPI. I learn programming since 10 grade, this app has been written 2.5 years after. At free time i watch anime, play guitar and games. If you enjoy app you could donate me some money (for new PC)</string>
+    <string name="small_donation">Small Donation</string>
+    <string name="medium_donation">Medium Donation</string>
+    <string name="large_donation">Large Donation</string>
+    <string name="about_me_title">About Me</string>
 </resources>

@@ -20,21 +20,20 @@ import java.util.List;
  */
 public class Utils {
 
-    public static String execCommand(String command, Process p) throws IOException {
-        DataOutputStream stdin = new DataOutputStream(p.getOutputStream());
-        stdin.writeBytes(command+"\n");
+    public static String execSUCommand(String command) throws IOException {
+        Process p = Runtime.getRuntime().exec(new String[]{"su","-c",command});
         InputStream stdout = p.getInputStream();
-        int BUFF_LEN = 4096;
+        int BUFF_LEN = 64;
         byte[] buffer = new byte[BUFF_LEN];
         int read;
-        String out = new String();
+        StringBuilder out = new StringBuilder();
         while(true){
             read = stdout.read(buffer);
-            out += new String(buffer, 0, read);
+            out.append(new String(buffer, 0, read));
             if(read<BUFF_LEN)
                 break;
         }
-        return out;
+        return out.toString();
     }
 
     public static void parseData(Context context, String data, List<NetworkObj> list){
@@ -48,37 +47,8 @@ public class Utils {
             index = last;
         }
 
-
         list.clear();
 
-        String curr;
-        NetworkObj obj;
-
-        int indexOfkeymgmt,indexOfPass,indexOfPrior;
-        /*
-         * Old Version
-         *
-        for (int i = 0; i < raw_list.size(); i++){
-            curr = raw_list.get(i);
-            obj = new NetworkObj();
-
-            indexOfkeymgmt = curr.indexOf("key_mgmt=");
-            obj.key_mgmt = curr.substring(indexOfkeymgmt + 9, curr.indexOf("\n", indexOfkeymgmt));
-
-            if (obj.key_mgmt.equals("NONE")) continue;
-            else{
-                indexOfPass = curr.indexOf("psk=");
-                obj.psk = curr.substring(indexOfPass+5,curr.indexOf("\n",indexOfPass)-1);
-            }
-
-            obj.ssid = curr.substring(curr.indexOf("ssid=") + 6, curr.indexOf("\n") - 1);
-
-            indexOfPrior = curr.indexOf("priority=");
-            obj.priority = Integer.parseInt(curr.substring(indexOfPrior + 9, curr.indexOf("\n", indexOfPrior)));
-
-            list.add(obj);
-        }
-        */
         NetworkObj networkObj;
         for (int i = 0; i < raw_list.size(); i++){
             networkObj = new Parser(context, raw_list.get(i)).getNetwork();
@@ -88,42 +58,20 @@ public class Utils {
         }
     }
 
-    public static boolean checkFile(Process p){
+    public static boolean checkConfigFile(){
         try {
-            String ls = execCommand("ls /data/misc/wifi",p);
+            String ls = execSUCommand("su -c 'ls /data/misc/wifi'");
+            Log.wtf("123","checkfile ls:" + ls);
             String[] arr = ls.split("\\s");
-            Log.wtf("my",ls);
             for (String str : arr){
                 Log.wtf("str ",str);
                 if(str.equals("wpa_supplicant.conf"))
                     return true;
             }
         } catch (IOException e) {
+            Log.wtf("123","checkfile catch");
             e.printStackTrace();
         }
         return false;
     }
-
-    public static String toJson(List<NetworkObj> list){
-        Gson gson = new Gson();
-        return gson.toJson(list);
-    }
-
-    public static List<NetworkObj> fromJson(String json){
-        Gson gson = new Gson();
-        Type listType = new TypeToken<List<NetworkObj>>(){}.getType();
-        return gson.fromJson(json, listType);
-    }
-
-    public static void createFile(List<NetworkObj> list) throws IOException {
-        Log.wtf("lolol", Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "wifi_pass.txt");
-        File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),"wifi_pass.txt");
-        if(file.exists()) file.delete();
-        if(file.createNewFile() && file.exists()){
-            OutputStream fo = new FileOutputStream(file);
-            fo.write(Utils.toJson(list).getBytes());
-            fo.close();
-        }
-    }
-
 }

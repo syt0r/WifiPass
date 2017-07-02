@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
@@ -18,17 +19,37 @@ public class AboutActivity extends AppCompatActivity implements BillingProcessor
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         bp = new BillingProcessor(this, getString(R.string.license_key), this);
         boolean isAvailable = BillingProcessor.isIabServiceAvailable(this);
         if(!isAvailable) {
-            findViewById(R.id.donate).setVisibility(View.INVISIBLE);
+            findViewById(R.id.donate_small).setVisibility(View.INVISIBLE);
+            findViewById(R.id.donate_medium).setVisibility(View.INVISIBLE);
+            findViewById(R.id.donate_large).setVisibility(View.INVISIBLE);
             Toast.makeText(this,"To donate please update Google Play Services",Toast.LENGTH_SHORT).show();
         }
     }
 
     public void Donate(View v){
-        bp.purchase(this,"test");
+        switch (v.getId()){
+            case R.id.donate_small:
+                bp.purchase(this,"small");
+                break;
+            case R.id.donate_medium:
+                bp.purchase(this,"medium");
+                break;
+            case R.id.donate_large:
+                bp.purchase(this,"large");
+                break;
+        }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId()==android.R.id.home)
+            finish();
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -60,6 +81,7 @@ public class AboutActivity extends AppCompatActivity implements BillingProcessor
     @Override
     public void onBillingError(int errorCode, Throwable error) {
         Log.wtf("purchase","error "+errorCode);
+        Toast.makeText(this,"Purchase error: " + errorCode,Toast.LENGTH_SHORT).show();
     }
 
     @Override
