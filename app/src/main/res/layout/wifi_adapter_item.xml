@@ -1,79 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:orientation="horizontal"
     android:padding="20dp">
 
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical|"
-        android:background="@drawable/ic_signal_wifi_3_bar_24dp"
-        android:layout_marginRight="20dp"/>
+        android:layout_gravity="center_vertical"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/ic_signal_wifi_3_bar_24dp" />
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_weight="10">
+        android:layout_weight="10"
+        android:orientation="vertical">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/ssid"/>
+            android:text="@string/ssid" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:id="@+id/ssid"
-            android:text="error"
-            android:textStyle="bold|italic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
-            android:layout_marginBottom="5dp"/>
+            android:layout_marginBottom="5dp"
+            android:text="error"
+            android:textStyle="bold|italic" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/security"/>
+            android:text="@string/security" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:id="@+id/security"
-            android:text="error"
-            android:textStyle="bold|italic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
-            android:layout_marginBottom="5dp"/>
+            android:layout_marginBottom="5dp"
+            android:text="error"
+            android:textStyle="bold|italic" />
 
         <LinearLayout
+            android:id="@+id/linearLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:id="@+id/linearLayout">
+            android:orientation="vertical">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/password"/>
+                android:text="@string/password" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:id="@+id/pass"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
                 android:text="error"
-                android:textStyle="bold|italic"
-                android:layout_marginLeft="5dp"/>
+                android:textStyle="bold|italic" />
 
         </LinearLayout>
 
     </LinearLayout>
 
     <ImageButton
+        android:id="@+id/dropdown"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical|"
-        android:id="@+id/dropdown"
-        android:background="@drawable/ic_keyboard_arrow_down_24dp"/>
+        android:layout_gravity="center_vertical"
+        android:background="@drawable/ic_keyboard_arrow_down_24dp" />
 
 </LinearLayout>

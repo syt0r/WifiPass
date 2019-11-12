@@ -17,7 +17,7 @@
     <string name="restore">Restore</string>
     <string name="backup_manager">Backup Manager</string>
     <string name="on_backup_create" translatable="false">Backup file created in your Downloads folder</string>
-    <string name="empty_list">Your wifi list is empty</string>
+    <string name="empty_list">Your wifi wifiNetworksList is empty</string>
     <string name="unknown">Unknown</string>
     <string name="encrypted">Encrypted by device</string>
     <string name="author">Author</string>

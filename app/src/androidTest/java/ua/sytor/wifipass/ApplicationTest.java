@@ -1,13 +1,41 @@
 package ua.sytor.wifipass;
 
-import android.app.Application;
-import android.test.ApplicationTestCase;
+import org.junit.Assert;
+import org.junit.Test;
+import ua.sytor.wifipass.interactor.command_executer.CommandExecutorContract;
+import ua.sytor.wifipass.interactor.command_executer.CommandExecutor;
 
-/**
- * <a href="http://d.android.com/tools/testing/testing_android.html">Testing Fundamentals</a>
- */
-public class ApplicationTest extends ApplicationTestCase<Application> {
-    public ApplicationTest() {
-        super(Application.class);
+public class ApplicationTest {
+
+    CommandExecutorContract commandExecutor = new CommandExecutor();
+
+    @Test
+    public void testCmdCommand() {
+
+        String output = null;
+        try {
+            output = commandExecutor.execCommand("su -c cat /data/misc/wifi/wpa_supplicant.conf");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        System.out.println("output " + output);
+        Assert.assertEquals(1, 1);
+
     }
+
+    @Test
+    public void testCommand() {
+
+    }
+
+    @Test
+    public void testSu() {
+
+    }
+
+    @Test
+    public void getContent() {
+
+    }
+
 }
