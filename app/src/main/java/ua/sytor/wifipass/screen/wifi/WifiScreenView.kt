@@ -5,17 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import org.koin.androidx.scope.currentScope
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import org.koin.core.parameter.parametersOf
-
 import ua.sytor.wifipass.R
-import ua.sytor.wifipass.model.WifiNetworkInfo
+import ua.sytor.wifipass.core.parser.Parser
 import ua.sytor.wifipass.screen.wifi.ui.WifiNetworkListAdapter
 
-class WifiScreenView : Fragment(), WifiScreenContract.View {
+class WifiScreenView : Fragment() {
 
-    val presenter: WifiScreenContract.Presenter by viewModel()
+    private val viewModel by viewModel<WifiScreenViewModel>()
 
     private val adapter = WifiNetworkListAdapter()
 
@@ -25,19 +22,17 @@ class WifiScreenView : Fragment(), WifiScreenContract.View {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        presenter.attachView(currentScope.get { parametersOf(view) })
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        presenter.detachView()
     }
 
-    override fun showData(data: List<WifiNetworkInfo>) {
+    private fun showData(data: List<Parser.WifiNetworkData>) {
 
     }
 
-    override fun showRawConfig(rawConfig: String) {
+    private fun showRawConfig(rawConfig: String) {
 
     }
 

@@ -3,9 +3,11 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/AndroidStudioProjects-WifiPass.iml" filepath="$PROJECT_DIR$/AndroidStudioProjects-WifiPass.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/AndroidStudioProjects-WifiPass-app.iml" filepath="$PROJECT_DIR$/app/AndroidStudioProjects-WifiPass-app.iml" group="WifiPass/app" />
       <module fileurl="file://$PROJECT_DIR$/WifiPass.iml" filepath="$PROJECT_DIR$/WifiPass.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/WifiPass-app.iml" filepath="$PROJECT_DIR$/app/WifiPass-app.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/yaroslav.shuliak-AndroidStudioProjects-WifiPass.iml" filepath="$PROJECT_DIR$/yaroslav.shuliak-AndroidStudioProjects-WifiPass.iml" group="WifiPass" />
     </modules>
   </component>
 </project>

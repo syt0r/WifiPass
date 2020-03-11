@@ -6,25 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
-
 import ua.sytor.wifipass.R
 
-class PasswordScreenView : Fragment(), PasswordScreenContract.View {
+class PasswordScreenView : Fragment() {
 
-    val presenter: PasswordScreenContract.Presenter by viewModel()
+	private val viewModel by viewModel<PasswordScreenViewModel>()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.password_fragment, container, false)
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        presenter.attachView(this)
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        presenter.detachView()
-    }
+	override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+		return inflater.inflate(R.layout.password_fragment, container, false)
+	}
 
 }

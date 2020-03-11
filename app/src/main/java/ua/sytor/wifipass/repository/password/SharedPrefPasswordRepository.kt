@@ -1,32 +1,43 @@
 package ua.sytor.wifipass.repository.password
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
+import kotlinx.coroutines.flow.flow
 
 class SharedPrefPasswordRepository(context: Context) : PasswordRepository {
 
-    private val sharedPreferences: SharedPreferences = context.applicationContext.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
+	private val sharedPreferences: SharedPreferences by lazy {
+		context.applicationContext.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
+	}
 
-    override val isPasswordProtected: Boolean
-        get() = sharedPreferences.contains(PASSWORD_KEY)
+	override fun isPasswordProtected() = flow {
+		emit(sharedPreferences.contains(PASSWORD_KEY))
+	}
 
-    override fun savePassword(password: String) {
-        sharedPreferences.edit()
-                .putString(PASSWORD_KEY, password)
-                .apply()
-    }
+	@SuppressLint("ApplySharedPref")
+	override fun savePassword(password: String) = flow {
+		sharedPreferences.edit()
+				.putString(PASSWORD_KEY, password)
+				.commit()
+		emit(Unit)
+	}
 
-    override fun resetPassword() {
-        sharedPreferences.edit().remove(PASSWORD_KEY).apply()
-    }
+	@SuppressLint("ApplySharedPref")
+	override fun resetPassword() = flow {
+		sharedPreferences.edit()
+				.remove(PASSWORD_KEY)
+				.commit()
+		emit(Unit)
+	}
 
-    override fun checkPassword(password: String) {
+	override fun checkPassword(password: String) = flow {
+		emit(password == sharedPreferences.getString(PASSWORD_KEY, null))
+	}
 
-    }
-
-    companion object {
-        private const val PREF_NAME = "password_store"
-        private const val PASSWORD_KEY = "password"
-    }
+	companion object {
+		private const val PREF_NAME = "password_store"
+		private const val PASSWORD_KEY = "password"
+	}
 
 }
