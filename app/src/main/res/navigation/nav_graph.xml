@@ -6,18 +6,46 @@
 
     <fragment
         android:id="@+id/router_fragment"
-        android:name="ua.sytor.wifipass.screen.router.RouterFragment"/>
+        android:name="ua.sytor.wifipass.screen.router.RouterFragment">
+
+        <action
+            android:id="@+id/router_to_wifi_action"
+            app:destination="@id/wifi_fragment"
+            app:popUpTo="@id/router_fragment"
+            app:popUpToInclusive="true" />
+
+        <action
+            android:id="@+id/router_to_pass_action"
+            app:destination="@id/password_fragment"
+            app:popUpTo="@id/router_fragment"
+            app:popUpToInclusive="true" />
+
+    </fragment>
 
     <fragment
         android:id="@+id/wifi_fragment"
-        android:name="ua.sytor.wifipass.screen.wifi.WifiScreenView" />
+        android:name="ua.sytor.wifipass.screen.wifi.WifiScreenView">
+
+        <action
+            android:id="@+id/wifi_to_about_action"
+            app:destination="@id/about_fragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/password_fragment"
+        android:name="ua.sytor.wifipass.screen.about.AboutScreenView">
+
+        <action
+            android:id="@+id/pass_to_wifi_action"
+            app:destination="@id/wifi_fragment"
+            app:popUpTo="@id/password_fragment"
+            app:popUpToInclusive="true" />
+
+    </fragment>
 
     <fragment
         android:id="@+id/about_fragment"
         android:name="ua.sytor.wifipass.screen.about.AboutScreenView" />
-
-    <fragment
-        android:id="@+id/password_fragment"
-        android:name="ua.sytor.wifipass.screen.about.AboutScreenView"/>
 
 </navigation>

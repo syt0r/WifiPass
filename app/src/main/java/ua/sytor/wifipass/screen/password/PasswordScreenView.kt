@@ -13,7 +13,7 @@ class PasswordScreenView : Fragment() {
 	private val viewModel by viewModel<PasswordScreenViewModel>()
 
 	override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-		return inflater.inflate(R.layout.password_fragment, container, false)
+		return inflater.inflate(R.layout.fragment_password, container, false)
 	}
 
 }

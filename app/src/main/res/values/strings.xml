@@ -1,40 +1,17 @@
 <resources>
     <string name="app_name">Wifi Password</string>
-    <string name="id" translatable="false">id</string>
-    <string name="launchPIN">Launch PIN</string>
-    <string name="cancel">Cancel</string>
-    <string name="launchPINset">Set launch PIN</string>
-    <string name="ssid" translatable="false">SSID</string>
-    <string name="security">Security</string>
-    <string name="password">Password</string>
-    <string name="copied">Copied</string>
-    <string name="shareUsing">Share using</string>
-    <string name="copyToClipboard">Copy to Clipboard</string>
-    <string name="sharePassword">Share Password</string>
-    <string name="error">Error: </string>
-    <string name="parsing">Parsing...</string>
-    <string name="backup">Backup</string>
-    <string name="restore">Restore</string>
-    <string name="backup_manager">Backup Manager</string>
-    <string name="on_backup_create" translatable="false">Backup file created in your Downloads folder</string>
-    <string name="empty_list">Your wifi wifiNetworksList is empty</string>
-    <string name="unknown">Unknown</string>
-    <string name="encrypted">Encrypted by device</string>
-    <string name="author">Author</string>
-    <string name="raw">View Raw Config</string>
-    <string name="new_pass">New Password</string>
-    <string name="disable_pass">Disable Password</string>
-    <string name="accept">Accept</string>
-    <string name="pass_disabled">Password has been disabled</string>
-    <string name="pass_enabled">Password has been enabled</string>
-    <string name="enter_4_nums">Enter 4 numbers</string>
-    <string name="file_not_found">Configuration file not found</string>
-    <string name="no_root">Can\'t get root access</string>
-    <string name="license_key" translatable="false">MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAnpmyh0/ZOKOSzapc3cWLNPiy2Bi7XmrfFL4z2KAOIZJsaZY5QvWSr7I35RJAbtzN4Ql2H20BDUdqVsjuMllWx79FUU8WQZqxerzXQNobtlNWdgGfoTi+NfvSAoB3LJdqJNenU/W6zSrPQRnnlT3kv9qhzlgHR1KVHrLTUsVm2eS1vDdKkEtFGeaCQ5zJ689TezcBui8QrReqayK97wxraVWR7hdazuOR0G0q0iIjGhZRMmWp4IhU9J22EKzJhReio4uMy8g4EgtIVYN80e46CYuxwXnw+rZ8+WNLaefy7LCl0qFhmHVEDNG/mh5NEcnaGsutF/igTJCkdxS374MtswIDAQAB</string>
-    <string name="thanks">Thanks, i appreciate your help</string>
-    <string name="about_me">\t Currently i\'m student at NTUU KPI. I learn programming since 10 grade, this app has been written 2.5 years after. At free time i watch anime, play guitar and games. If you enjoy app you could donate me some money (for new PC)</string>
-    <string name="small_donation">Small Donation</string>
-    <string name="medium_donation">Medium Donation</string>
-    <string name="large_donation">Large Donation</string>
-    <string name="about_me_title">About Me</string>
+
+    <!-- Wifi Screen -->
+    <string name="wifi_screen_ssid" translatable="false">SSID</string>
+    <string name="wifi_screen_security" translatable="false">Security</string>
+    <string name="wifi_screen_password" translatable="false">Password</string>
+
+    <string name="wifi_screen_retry">Retry</string>
+    <string name="wifi_screen_copied_to_clipboard">Copied to clipboard</string>
+    <string name="wifi_screen_share_password">Share with</string>
+
+    <string name="wifi_screen_no_root">No root access</string>
+    <string name="wifi_screen_config_not_found">Configuration file not found</string>
+    <string name="wifi_screen_unknown_failure">Unknown error: %1$s</string>
+
 </resources>

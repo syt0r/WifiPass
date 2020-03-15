@@ -2,16 +2,16 @@ package ua.sytor.wifipass.core.parser
 
 import android.os.Build
 
+data class WifiNetworkData(
+	val ssid: String,
+	val psk: String,
+	val keyManagementType: String = "Unknown",
+	val priority: Int = 0
+)
+
 interface Parser {
 
-	fun parseFileContent(fileContent: String): List<WifiNetworkData>
-
-	data class WifiNetworkData(
-		val ssid: String,
-		val psk: String,
-		val keyManagementType: String = "Unknown",
-		val priority: Int = 0
-	)
+	suspend fun parseFileContent(fileContent: String): List<WifiNetworkData>
 
 	companion object {
 

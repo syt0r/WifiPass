@@ -1,13 +1,12 @@
 package ua.sytor.wifipass.core.parser
 
 import org.jsoup.Jsoup
-import ua.sytor.wifipass.core.parser.Parser.WifiNetworkData
 import ua.sytor.wifipass.utils.trimQuotes
 import java.util.*
 
 class WifiConfigStoreParser : Parser {
 
-	override fun parseFileContent(fileContent: String): List<WifiNetworkData> {
+	override suspend fun parseFileContent(fileContent: String): List<WifiNetworkData> {
 
 		val wifiList = ArrayList<WifiNetworkData>()
 

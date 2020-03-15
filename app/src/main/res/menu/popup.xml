@@ -3,10 +3,10 @@
 
     <item
         android:id="@+id/copy"
-        android:title="@string/copyToClipboard"/>
+        android:title="string/copyToClipboard"/>
     <item
         android:id="@+id/share"
-        android:title="@string/sharePassword"/>
+        android:title="string/sharePassword"/>
 
 
 </menu>

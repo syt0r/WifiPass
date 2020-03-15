@@ -10,11 +10,11 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.onStart
 import ua.sytor.wifipass.R
-import ua.sytor.wifipass.repository.password.PasswordRepository
+import ua.sytor.wifipass.use_case.IsPasswordProtectedUseCase
 
 enum class NavigationRoute(val id: Int) {
-	PASSWORD_SCREEN(R.id.password_fragment),
-	WIFI_SCREEN(R.id.wifi_fragment)
+	PASSWORD_SCREEN(R.id.router_to_pass_action),
+	WIFI_SCREEN(R.id.router_to_wifi_action)
 }
 
 sealed class State {
@@ -24,7 +24,7 @@ sealed class State {
 }
 
 class RouterViewModel(
-	private val passwordRepository: PasswordRepository
+	private val isPasswordProtectedUseCase: IsPasswordProtectedUseCase
 ) : ViewModel() {
 
 	private val state = MutableLiveData<State>(State.Init)
@@ -36,7 +36,7 @@ class RouterViewModel(
 		if (state.value != State.Init)
 			return
 
-		passwordRepository.isPasswordProtected()
+		isPasswordProtectedUseCase()
 			.flowOn(Dispatchers.IO)
 			.onStart { state.value = State.Loading }
 			.onEach { isPasswordProtected ->

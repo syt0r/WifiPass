@@ -13,6 +13,7 @@ import ua.sytor.wifipass.screen.about.di.aboutScreenModule
 import ua.sytor.wifipass.screen.password.di.passwordScreenModule
 import ua.sytor.wifipass.screen.router.di.routerScreenModule
 import ua.sytor.wifipass.screen.wifi.di.wifiScreenModule
+import ua.sytor.wifipass.use_case.di.useCaseModule
 
 class KoinDependencies {
 
@@ -26,7 +27,8 @@ class KoinDependencies {
 			commandExecutorModule,
 			fileReaderModule,
 			networkDataCollectorModule,
-			parserModule
+			parserModule,
+			useCaseModule
 		)
 
 		private val screens = setOf(

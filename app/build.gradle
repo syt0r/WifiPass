@@ -26,6 +26,7 @@ android {
 ext {
     APP_COMPAT_VERSION = "1.1.0"
     RECYCLER_VERSION = "1.1.0"
+    CONSTRAINT_LAYOUT_VERSION = "1.1.3"
     LIFECYCLE_VERSION = "2.2.0"
     NAVIGATION_VERSION = "2.2.1"
     KOIN_VERSION = "2.0.1"
@@ -38,6 +39,7 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation "androidx.appcompat:appcompat:$APP_COMPAT_VERSION"
     implementation "androidx.recyclerview:recyclerview:$RECYCLER_VERSION"
+    implementation "androidx.constraintlayout:constraintlayout:$CONSTRAINT_LAYOUT_VERSION"
 
     implementation "androidx.lifecycle:lifecycle-extensions:$LIFECYCLE_VERSION"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$LIFECYCLE_VERSION"

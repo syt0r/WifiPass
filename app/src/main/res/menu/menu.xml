@@ -4,15 +4,15 @@
 
     <item
         android:id="@+id/raw"
-        android:title="@string/raw"/>
+        android:title="string/raw"/>
 
     <item
         android:id="@+id/key"
-        android:title="@string/password" />
+        android:title="string/password" />
 
     <item
         android:id="@+id/about"
-        android:title="@string/author" />
+        android:title="string/author" />
 
 
 </menu>

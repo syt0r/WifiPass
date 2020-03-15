@@ -8,12 +8,12 @@ import java.io.InputStreamReader
 class CommandExecutor : CommandExecutorContract.CommandExecutor {
 
     @Throws(Exception::class)
-    override fun execCommand(command: String): String {
+    override suspend fun execCommand(command: String): String {
         return execCommand(command, 2000)
     }
 
     @Throws(Exception::class)
-    override fun execCommand(command: String, timeout: Long): String {
+    override suspend fun execCommand(command: String, timeout: Long): String {
 
         val process = Runtime.getRuntime().exec(command)
 

@@ -2,12 +2,11 @@ package ua.sytor.wifipass.core.parser
 
 import java.util.ArrayList
 import java.util.HashMap
-import ua.sytor.wifipass.core.parser.Parser.WifiNetworkData
 import ua.sytor.wifipass.utils.trimQuotes
 
 class WpaSupplicantParser : Parser {
 
-    override fun parseFileContent(fileContent: String): List<WifiNetworkData> {
+    override suspend fun parseFileContent(fileContent: String): List<WifiNetworkData> {
 
         val networks = fileContent.split("network=".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
 
