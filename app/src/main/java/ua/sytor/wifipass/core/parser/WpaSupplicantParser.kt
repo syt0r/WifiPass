@@ -2,7 +2,7 @@ package ua.sytor.wifipass.core.parser
 
 import java.util.ArrayList
 import java.util.HashMap
-import ua.sytor.wifipass.utils.trimQuotes
+import ua.sytor.wifipass.extension.trimQuotes
 
 class WpaSupplicantParser : Parser {
 

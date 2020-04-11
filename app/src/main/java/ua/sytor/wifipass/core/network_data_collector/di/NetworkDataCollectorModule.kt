@@ -5,5 +5,7 @@ import ua.sytor.wifipass.core.network_data_collector.NetworkDataCollector
 import ua.sytor.wifipass.core.network_data_collector.NetworkDataCollectorContract
 
 val networkDataCollectorModule = module {
-	factory<NetworkDataCollectorContract.Collector> { NetworkDataCollector(get()) }
+	factory<NetworkDataCollectorContract.Collector> {
+		NetworkDataCollector(get(), get())
+	}
 }

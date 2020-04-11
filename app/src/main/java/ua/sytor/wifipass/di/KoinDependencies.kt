@@ -10,8 +10,7 @@ import ua.sytor.wifipass.core.network_data_collector.di.networkDataCollectorModu
 import ua.sytor.wifipass.core.parser.di.parserModule
 import ua.sytor.wifipass.repository.password.di.passwordRepositoryModule
 import ua.sytor.wifipass.screen.about.di.aboutScreenModule
-import ua.sytor.wifipass.screen.password.di.passwordScreenModule
-import ua.sytor.wifipass.screen.router.di.routerScreenModule
+import ua.sytor.wifipass.screen.splash.di.splashScreenModule
 import ua.sytor.wifipass.screen.wifi.di.wifiScreenModule
 import ua.sytor.wifipass.use_case.di.useCaseModule
 
@@ -33,8 +32,7 @@ class KoinDependencies {
 
 		private val screens = setOf(
 			aboutScreenModule,
-			passwordScreenModule,
-			routerScreenModule,
+			splashScreenModule,
 			wifiScreenModule
 		)
 

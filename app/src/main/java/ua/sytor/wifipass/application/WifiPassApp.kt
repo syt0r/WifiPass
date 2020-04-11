@@ -1,4 +1,4 @@
-package ua.sytor.wifipass
+package ua.sytor.wifipass.application
 
 import android.app.Application
 import ua.sytor.wifipass.di.KoinDependencies

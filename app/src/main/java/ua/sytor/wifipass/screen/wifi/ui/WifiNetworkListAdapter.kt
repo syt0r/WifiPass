@@ -47,7 +47,7 @@ class WifiNetworkListAdapter : RecyclerView.Adapter<WifiNetworkListAdapter.WifiI
 		init {
 			itemView.dropdown.setOnClickListener {
 				val popupMenu = PopupMenu(itemView.context, it)
-				popupMenu.inflate(R.menu.popup)
+				popupMenu.inflate(R.menu.wifi_screen_popup)
 				popupMenu.setOnMenuItemClickListener { menuItem ->
 					popupItemClickChannel.offer(
 						menuItem.itemId to wifiNetworksList[adapterPosition]

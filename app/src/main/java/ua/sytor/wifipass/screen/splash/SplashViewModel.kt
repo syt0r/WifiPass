@@ -1,4 +1,4 @@
-package ua.sytor.wifipass.screen.router
+package ua.sytor.wifipass.screen.splash
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -9,22 +9,20 @@ import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.onStart
-import ua.sytor.wifipass.R
+import ua.sytor.wifipass.use_case.CheckIsPasswordValidUseCase
 import ua.sytor.wifipass.use_case.IsPasswordProtectedUseCase
-
-enum class NavigationRoute(val id: Int) {
-	PASSWORD_SCREEN(R.id.router_to_pass_action),
-	WIFI_SCREEN(R.id.router_to_wifi_action)
-}
 
 sealed class State {
 	object Init : State()
 	object Loading : State()
-	data class Loaded(val route: NavigationRoute) : State()
+	object WaitingForPassword : State()
+	object CheckSuccessfullyCompleted : State()
+	object CheckFailed : State()
 }
 
-class RouterViewModel(
-	private val isPasswordProtectedUseCase: IsPasswordProtectedUseCase
+class SplashViewModel(
+	private val isPasswordProtectedUseCase: IsPasswordProtectedUseCase,
+	private val checkIsPasswordValidUseCase: CheckIsPasswordValidUseCase
 ) : ViewModel() {
 
 	private val state = MutableLiveData<State>(State.Init)
@@ -32,7 +30,6 @@ class RouterViewModel(
 	fun subscribeOnState(): LiveData<State> = state
 
 	fun loadRoute() {
-
 		if (state.value != State.Init)
 			return
 
@@ -40,15 +37,23 @@ class RouterViewModel(
 			.flowOn(Dispatchers.IO)
 			.onStart { state.value = State.Loading }
 			.onEach { isPasswordProtected ->
-				val route = if (isPasswordProtected) {
-					NavigationRoute.PASSWORD_SCREEN
-				} else {
-					NavigationRoute.WIFI_SCREEN
+				state.value = when {
+					isPasswordProtected -> State.WaitingForPassword
+					else -> State.CheckSuccessfullyCompleted
 				}
-				state.value = State.Loaded(route)
 			}
 			.launchIn(viewModelScope)
+	}
 
+	fun checkPassword(password: String) {
+		checkIsPasswordValidUseCase.invoke(password)
+			.onEach { isMatching ->
+				if (isMatching)
+					state.value = State.CheckSuccessfullyCompleted
+				else
+					state.value = State.CheckFailed
+			}
+			.launchIn(viewModelScope)
 	}
 
 }

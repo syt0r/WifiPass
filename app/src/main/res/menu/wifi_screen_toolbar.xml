@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/raw_config"
+        android:enabled="false"
+        android:icon="@drawable/ic_code_24dp"
+        android:title="@string/wifi_screen_raw"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/set_password"
+        android:icon="@drawable/ic_vpn_key_24dp"
+        android:title="@string/wifi_screen_set_password"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/about"
+        android:icon="@drawable/ic_info_24dp"
+        android:title="@string/wifi_screen_about"
+        app:showAsAction="ifRoom" />
+
+</menu>

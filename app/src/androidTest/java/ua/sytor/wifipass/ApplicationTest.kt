@@ -1,5 +1,6 @@
 package ua.sytor.wifipass
 
+import kotlinx.coroutines.runBlocking
 import org.junit.Assert
 import org.junit.Test
 import ua.sytor.wifipass.core.command_executer.CommandExecutor
@@ -10,7 +11,7 @@ class ApplicationTest {
 	var commandExecutor: CommandExecutorContract.CommandExecutor = CommandExecutor()
 
 	@Test
-	fun testCmdCommand() {
+	fun testCmdCommand() = runBlocking {
 		var output: String? = null
 		try {
 			output = commandExecutor.execCommand("su -c cat /data/misc/wifi/wpa_supplicant.conf")

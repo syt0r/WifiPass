@@ -1,30 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/router_fragment">
+    app:startDestination="@id/splash_fragment">
 
     <fragment
-        android:id="@+id/router_fragment"
-        android:name="ua.sytor.wifipass.screen.router.RouterFragment">
+        android:id="@+id/splash_fragment"
+        android:name="ua.sytor.wifipass.screen.splash.SplashFragment"
+        tools:layout="@layout/fragment_splash">
 
         <action
-            android:id="@+id/router_to_wifi_action"
+            android:id="@+id/splash_to_wifi_action"
             app:destination="@id/wifi_fragment"
-            app:popUpTo="@id/router_fragment"
-            app:popUpToInclusive="true" />
-
-        <action
-            android:id="@+id/router_to_pass_action"
-            app:destination="@id/password_fragment"
-            app:popUpTo="@id/router_fragment"
+            app:popUpTo="@id/splash_fragment"
             app:popUpToInclusive="true" />
 
     </fragment>
 
     <fragment
         android:id="@+id/wifi_fragment"
-        android:name="ua.sytor.wifipass.screen.wifi.WifiScreenView">
+        android:name="ua.sytor.wifipass.screen.wifi.WifiScreenFragment"
+        android:label="@string/wifi_screen_label"
+        tools:layout="@layout/fragment_wifi">
 
         <action
             android:id="@+id/wifi_to_about_action"
@@ -33,19 +31,9 @@
     </fragment>
 
     <fragment
-        android:id="@+id/password_fragment"
-        android:name="ua.sytor.wifipass.screen.about.AboutScreenView">
-
-        <action
-            android:id="@+id/pass_to_wifi_action"
-            app:destination="@id/wifi_fragment"
-            app:popUpTo="@id/password_fragment"
-            app:popUpToInclusive="true" />
-
-    </fragment>
-
-    <fragment
         android:id="@+id/about_fragment"
-        android:name="ua.sytor.wifipass.screen.about.AboutScreenView" />
+        android:name="ua.sytor.wifipass.screen.about.AboutScreenFragment"
+        android:label="@string/about_screen_label"
+        tools:layout="@layout/fragment_about" />
 
 </navigation>

@@ -9,7 +9,7 @@ class IsPasswordProtectedUseCase(
 
 	operator fun invoke() = flow {
 		val password = repository.getPassword()
-		emit(password != null)
+		emit(!password.isNullOrEmpty())
 	}
 
 }
