@@ -1,6 +1,9 @@
 package ua.sytor.wifipass.core.network_data_collector
 
-import ua.sytor.wifipass.core.parser.WifiNetworkData
+import ua.sytor.wifipass.core.parser.Parser
+import ua.sytor.wifipass.core.parser.WifiConfigStoreParser
+import ua.sytor.wifipass.core.parser.WpaSupplicantParser
+import ua.sytor.wifipass.core.parser.entity.WifiNetworkData
 
 interface NetworkDataCollectorContract {
 
@@ -29,3 +32,10 @@ interface NetworkDataCollectorContract {
 	}
 
 }
+
+data class ConfigOptions(val parser: Parser)
+
+val configs = mapOf(
+	"/data/misc/wifi/wpa_supplicant.conf" to ConfigOptions(WpaSupplicantParser()),
+	"/data/misc/wifi/WifiConfigStore.xml" to ConfigOptions(WifiConfigStoreParser())
+)

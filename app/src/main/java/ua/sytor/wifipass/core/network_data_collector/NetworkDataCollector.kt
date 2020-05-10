@@ -3,19 +3,10 @@ package ua.sytor.wifipass.core.network_data_collector
 import ua.sytor.wifipass.core.command_executer.CommandExecutorContract
 import ua.sytor.wifipass.core.logger.Logger
 import ua.sytor.wifipass.core.network_data_collector.NetworkDataCollectorContract.CollectingResult
-import ua.sytor.wifipass.core.parser.Parser
 
 class NetworkDataCollector(
-	private val commandExecutor: CommandExecutorContract.CommandExecutor,
-	private val parser: Parser
+	private val commandExecutor: CommandExecutorContract.CommandExecutor
 ) : NetworkDataCollectorContract.Collector {
-
-	companion object {
-		private val configsPath = arrayOf(
-			"/data/misc/wifi/wpa_supplicant.conf",
-			"/data/misc/wifi/WifiConfigStore.xml"
-		)
-	}
 
 	override suspend fun collect(): CollectingResult {
 		Logger.log("collect")
@@ -23,13 +14,19 @@ class NetworkDataCollector(
 			return CollectingResult.Failure(CollectingResult.FailureReason.NO_ROOT_ACCESS)
 		}
 
-		val configPath = configsPath.find { isConfigurationFileExists(it) }
+		val (configPath, configOptions) = configs
+			.filter { (filePath, _) ->
+				isConfigurationFileExists(filePath)
+			}
+			.asSequence()
+			.firstOrNull()
 			?: return CollectingResult.Failure(CollectingResult.FailureReason.CONFIG_NOT_FOUND)
+
 
 		val fileContent = readFileContent(configPath)
 			?: return CollectingResult.Failure(CollectingResult.FailureReason.UNKNOWN)
 
-		val data = parser.parseFileContent(fileContent)
+		val data = configOptions.parser.parseFileContent(fileContent)
 
 		return CollectingResult.Success(data, fileContent)
 	}

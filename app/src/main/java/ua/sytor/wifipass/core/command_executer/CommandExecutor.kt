@@ -1,14 +1,17 @@
 package ua.sytor.wifipass.core.command_executer
 
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.asCoroutineDispatcher
 import kotlinx.coroutines.withContext
-import kotlinx.coroutines.withTimeout
 import java.io.BufferedReader
 import java.io.IOException
 import java.io.InputStream
 import java.io.InputStreamReader
+import java.util.concurrent.Executors
 
 class CommandExecutor : CommandExecutorContract.CommandExecutor {
+
+	val executorsPool = Executors.newFixedThreadPool(2)
+		.asCoroutineDispatcher()
 
 	@Throws(Exception::class)
 	override suspend fun execCommand(command: String): String {
@@ -19,13 +22,10 @@ class CommandExecutor : CommandExecutorContract.CommandExecutor {
 	override suspend fun execCommand(command: String, timeout: Long): String {
 		val process = Runtime.getRuntime().exec(command)
 
-		//TODO handle commands that doesn't cancel and block thread
-		withTimeout(timeout) {
-			process.waitFor()
-		}
+		val output = withContext(executorsPool) { getStreamOutput(process.inputStream) }
+		val error = withContext(executorsPool) { getStreamOutput(process.errorStream) }
 
-		val output = getStreamOutput(process.inputStream)
-		val error = getStreamOutput(process.errorStream)
+		process.waitFor()
 
 		return if (error.isEmpty())
 			output

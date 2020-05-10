@@ -1,17 +1,16 @@
 package ua.sytor.wifipass
 
+import kotlinx.coroutines.runBlocking
 import org.junit.Assert
 import org.junit.Test
 import ua.sytor.wifipass.core.parser.WifiConfigStoreParser
 import ua.sytor.wifipass.core.parser.WpaSupplicantParser
 
-/**
- * To work on unit tests, switch the Test Artifact in the Build Variants view.
- */
 class ParserTests {
+
 	@Test
 	@Throws(Exception::class)
-	fun wpaSupplicantParserTest() {
+	fun wpaSupplicantParserTest() = runBlocking {
 		val data = "" +
 				"network={\n" +
 				"    ssid=\"example\"\n" +
@@ -39,11 +38,10 @@ class ParserTests {
 		val parser = WpaSupplicantParser()
 		val list = parser.parseFileContent(data)
 		Assert.assertEquals("example", list[0].ssid)
-		Assert.assertEquals("WPA-EAP", list[0].keyManagementType)
 	}
 
 	@Test
-	fun wifiConfigStoreParserTest() {
+	fun wifiConfigStoreParserTest() = runBlocking {
 		val data = "" +
 				"<?xml version='1.0' encoding='utf-8' standalone='yes' ?>\n" +
 				"<WifiConfigStoreData>\n" +
@@ -109,6 +107,7 @@ class ParserTests {
 		val parser = WifiConfigStoreParser()
 		val list = parser.parseFileContent(data)
 		Assert.assertEquals("サトル", list[0].ssid)
-		Assert.assertEquals("i9041974", list[0].psk)
+		Assert.assertEquals("i9041974", list[0].password)
 	}
+
 }

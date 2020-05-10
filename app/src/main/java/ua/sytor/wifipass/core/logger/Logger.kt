@@ -1,6 +1,7 @@
 package ua.sytor.wifipass.core.logger
 
 import android.util.Log
+import ua.sytor.wifipass.BuildConfig
 
 class Logger {
 
@@ -9,7 +10,8 @@ class Logger {
 		private const val TAG = "WifiPass"
 
 		fun log(message: String) {
-			Log.d(TAG, message)
+			if (BuildConfig.DEBUG)
+				Log.d(TAG, message)
 		}
 
 	}

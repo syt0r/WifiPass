@@ -44,6 +44,14 @@
     <string name="about_screen_label">About</string>
 
     <string name="about_screen_version">Version: %s</string>
-    <string name="about_screen_source_code">Source code</string>
+    <string name="about_screen_description">
+        View saved wi-fi passwords and share them with whom you want.\nPassword setup function is provided in the application for security.
+    </string>
+
+    <string name="about_screen_source_code">Source code:</string>
+    <string name="about_screen_github">Github</string>
+    <string name="about_screen_donate_message">Want to support?</string>
+    <string name="about_screen_donate_button">Donate now</string>
+
 
 </resources>

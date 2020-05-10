@@ -9,4 +9,6 @@
         <item name="iconColor">?android:textColorPrimary</item>
     </style>
 
+    <style name="AlertDialog" parent="Theme.AppCompat.DayNight.Dialog.Alert" />
+
 </resources>

@@ -4,10 +4,10 @@ import android.app.Application
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 import org.koin.core.module.Module
+import ua.sytor.wifipass.core.billing.di.billingModule
 import ua.sytor.wifipass.core.command_executer.di.commandExecutorModule
 import ua.sytor.wifipass.core.file_reader.di.fileReaderModule
 import ua.sytor.wifipass.core.network_data_collector.di.networkDataCollectorModule
-import ua.sytor.wifipass.core.parser.di.parserModule
 import ua.sytor.wifipass.repository.password.di.passwordRepositoryModule
 import ua.sytor.wifipass.screen.about.di.aboutScreenModule
 import ua.sytor.wifipass.screen.splash.di.splashScreenModule
@@ -23,10 +23,10 @@ class KoinDependencies {
 		)
 
 		private val coreModules = setOf(
+			billingModule,
 			commandExecutorModule,
 			fileReaderModule,
 			networkDataCollectorModule,
-			parserModule,
 			useCaseModule
 		)
 

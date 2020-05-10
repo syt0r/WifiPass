@@ -3,29 +3,21 @@ package ua.sytor.wifipass.screen.wifi.ui
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.widget.PopupMenu
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.adapter_wifi_item.view.*
-import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.consumeAsFlow
 import ua.sytor.wifipass.R
-import ua.sytor.wifipass.core.parser.WifiNetworkData
+import ua.sytor.wifipass.core.parser.entity.WifiNetworkData
 
 class WifiNetworkListAdapter : RecyclerView.Adapter<WifiNetworkListAdapter.WifiItemViewHolder>() {
 
-	private val popupItemClickChannel = Channel<Pair<Int, WifiNetworkData>>()
-
 	private val wifiNetworksList = ArrayList<WifiNetworkData>()
 
-	fun subscribeOnItemSelected(): Flow<Pair<Int, WifiNetworkData>> =
-		popupItemClickChannel.consumeAsFlow()
+	var onDropdownButtonClickListener: ((view: View, wifi: WifiNetworkData) -> Unit)? = null
 
 	override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WifiItemViewHolder {
-		return WifiItemViewHolder(
-			LayoutInflater.from(parent.context)
-				.inflate(R.layout.adapter_wifi_item, parent, false)
-		)
+		val view = LayoutInflater.from(parent.context)
+			.inflate(R.layout.adapter_wifi_item, parent, false)
+		return WifiItemViewHolder(view)
 	}
 
 	override fun onBindViewHolder(holder: WifiItemViewHolder, position: Int) {
@@ -46,23 +38,17 @@ class WifiNetworkListAdapter : RecyclerView.Adapter<WifiNetworkListAdapter.WifiI
 
 		init {
 			itemView.dropdown.setOnClickListener {
-				val popupMenu = PopupMenu(itemView.context, it)
-				popupMenu.inflate(R.menu.wifi_screen_popup)
-				popupMenu.setOnMenuItemClickListener { menuItem ->
-					popupItemClickChannel.offer(
-						menuItem.itemId to wifiNetworksList[adapterPosition]
-					)
-					false
-				}
-				popupMenu.show()
+				onDropdownButtonClickListener?.invoke(
+					it,
+					wifiNetworksList[adapterPosition]
+				)
 			}
 		}
 
 		fun bind() {
-			val (ssid, psk, keyManagementType) = wifiNetworksList[adapterPosition]
+			val (ssid, password) = wifiNetworksList[adapterPosition]
 			itemView.ssid.text = ssid
-			itemView.security.text = keyManagementType
-			itemView.pass.text = psk
+			itemView.pass.text = password
 		}
 
 	}

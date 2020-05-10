@@ -33,20 +33,6 @@
             android:textStyle="bold|italic"
             tools:text="Error" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/wifi_screen_security" />
-
-        <TextView
-            android:id="@+id/security"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginBottom="5dp"
-            android:textStyle="bold|italic"
-            tools:text="error" />
-
         <LinearLayout
             android:id="@+id/linearLayout"
             android:layout_width="wrap_content"
@@ -75,6 +61,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:background="@drawable/ic_keyboard_arrow_down_24dp" />
+        android:background="?selectableItemBackgroundBorderless"
+        android:src="@drawable/ic_keyboard_arrow_down_24dp" />
 
 </LinearLayout>

@@ -5,5 +5,5 @@ import org.koin.dsl.module
 import ua.sytor.wifipass.screen.about.AboutScreenViewModel
 
 val aboutScreenModule = module {
-	viewModel { AboutScreenViewModel() }
+	viewModel { AboutScreenViewModel(get()) }
 }

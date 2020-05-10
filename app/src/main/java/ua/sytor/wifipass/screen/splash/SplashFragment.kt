@@ -6,7 +6,6 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import kotlinx.android.synthetic.main.dialog_check_password.view.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -25,7 +24,6 @@ class SplashFragment : Fragment() {
 			}
 
 			State.Loading -> {
-
 			}
 
 			State.WaitingForPassword -> {
@@ -56,7 +54,7 @@ class SplashFragment : Fragment() {
 	private fun showPasswordCheckDialog() {
 		Logger.log("showPasswordCheckDialog")
 		val view = LayoutInflater.from(context).inflate(R.layout.dialog_check_password, null)
-		AlertDialog.Builder(context!!)
+		AlertDialog.Builder(requireContext(), R.style.AlertDialog)
 			.setTitle(R.string.check_password_dialog_title)
 			.setView(view)
 			.setCancelable(false)
@@ -71,7 +69,7 @@ class SplashFragment : Fragment() {
 
 	private fun exitApp() {
 		Logger.log("exitApp")
-		activity!!.finishAndRemoveTask()
+		requireActivity().finishAndRemoveTask()
 	}
 
 }

@@ -26,7 +26,11 @@
 
         <action
             android:id="@+id/wifi_to_about_action"
-            app:destination="@id/about_fragment" />
+            app:destination="@id/about_fragment"
+            app:enterAnim="@anim/screen_transition_forward_enter"
+            app:exitAnim="@anim/screen_transition_forward_exit"
+            app:popEnterAnim="@anim/screen_transition_backward_enter"
+            app:popExitAnim="@anim/screen_transition_backward_exit" />
 
     </fragment>
 
