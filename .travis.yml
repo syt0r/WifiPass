@@ -1,0 +1,12 @@
+language: android
+
+android:
+  components:
+    - build-tools-29.0.3
+    - android-29
+
+before_install:
+  - openssl aes-256-cbc -K $key -iv $iv -in key_store.jks.enc -out key_store.jks -d
+
+script:
+  - ./gradlew build test

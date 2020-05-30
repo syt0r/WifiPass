@@ -13,15 +13,28 @@ android {
         versionCode 7
         versionName "2.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField "String", "LICENSE_KEY", "\"MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAnpmyh0/ZOKOSzapc3cWLNPiy2Bi7XmrfFL4z2KAOIZJsaZY5QvWSr7I35RJAbtzN4Ql2H20BDUdqVsjuMllWx79FUU8WQZqxerzXQNobtlNWdgGfoTi+NfvSAoB3LJdqJNenU/W6zSrPQRnnlT3kv9qhzlgHR1KVHrLTUsVm2eS1vDdKkEtFGeaCQ5zJ689TezcBui8QrReqayK97wxraVWR7hdazuOR0G0q0iIjGhZRMmWp4IhU9J22EKzJhReio4uMy8g4EgtIVYN80e46CYuxwXnw+rZ8+WNLaefy7LCl0qFhmHVEDNG/mh5NEcnaGsutF/igTJCkdxS374MtswIDAQAB\""
+
     }
 
-    buildTypes {
-        debug {
-            buildConfigField "String", "LICENSE_KEY", "\"MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAnpmyh0/ZOKOSzapc3cWLNPiy2Bi7XmrfFL4z2KAOIZJsaZY5QvWSr7I35RJAbtzN4Ql2H20BDUdqVsjuMllWx79FUU8WQZqxerzXQNobtlNWdgGfoTi+NfvSAoB3LJdqJNenU/W6zSrPQRnnlT3kv9qhzlgHR1KVHrLTUsVm2eS1vDdKkEtFGeaCQ5zJ689TezcBui8QrReqayK97wxraVWR7hdazuOR0G0q0iIjGhZRMmWp4IhU9J22EKzJhReio4uMy8g4EgtIVYN80e46CYuxwXnw+rZ8+WNLaefy7LCl0qFhmHVEDNG/mh5NEcnaGsutF/igTJCkdxS374MtswIDAQAB\""
-        }
-        release {
-            buildConfigField "String", "LICENSE_KEY", "\"MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAnpmyh0/ZOKOSzapc3cWLNPiy2Bi7XmrfFL4z2KAOIZJsaZY5QvWSr7I35RJAbtzN4Ql2H20BDUdqVsjuMllWx79FUU8WQZqxerzXQNobtlNWdgGfoTi+NfvSAoB3LJdqJNenU/W6zSrPQRnnlT3kv9qhzlgHR1KVHrLTUsVm2eS1vDdKkEtFGeaCQ5zJ689TezcBui8QrReqayK97wxraVWR7hdazuOR0G0q0iIjGhZRMmWp4IhU9J22EKzJhReio4uMy8g4EgtIVYN80e46CYuxwXnw+rZ8+WNLaefy7LCl0qFhmHVEDNG/mh5NEcnaGsutF/igTJCkdxS374MtswIDAQAB\""
+    signingConfigs {
 
+        release {
+            storeFile file('key_store.jks')
+            storePassword System.getenv('store_pass')
+            keyAlias System.getenv('key_alias')
+            keyPassword System.getenv('key_pass')
+            v1SigningEnabled true
+            v2SigningEnabled true
+        }
+    }
+
+
+    buildTypes {
+        debug {}
+        release {
+            signingConfig signingConfigs.release
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
@@ -31,7 +44,7 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
-    
+
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8
     }
