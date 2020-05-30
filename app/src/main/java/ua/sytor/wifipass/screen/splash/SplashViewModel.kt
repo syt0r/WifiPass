@@ -5,10 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.flowOn
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.flow.onStart
+import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.runBlocking
 import ua.sytor.wifipass.use_case.CheckIsPasswordValidUseCase
 import ua.sytor.wifipass.use_case.IsPasswordProtectedUseCase
 
@@ -45,15 +43,13 @@ class SplashViewModel(
 			.launchIn(viewModelScope)
 	}
 
-	fun checkPassword(password: String) {
-		checkIsPasswordValidUseCase.invoke(password)
-			.onEach { isMatching ->
-				if (isMatching)
-					state.value = State.CheckSuccessfullyCompleted
-				else
-					state.value = State.CheckFailed
-			}
-			.launchIn(viewModelScope)
+	fun checkPassword(password: String): Boolean {
+		val isValid = runBlocking { checkIsPasswordValidUseCase.invoke(password).first() }
+		if (isValid)
+			state.value = State.CheckSuccessfullyCompleted
+		else
+			state.value = State.CheckFailed
+		return isValid
 	}
 
 }

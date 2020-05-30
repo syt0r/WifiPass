@@ -10,7 +10,6 @@ import kotlinx.coroutines.channels.BroadcastChannel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.consumeAsFlow
-import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.launch
 import ua.sytor.wifipass.core.billing.BillingContract.BillingQueryResult
 import ua.sytor.wifipass.core.billing.BillingContract.PurchaseResult
@@ -27,6 +26,7 @@ class BillingManager(
 		.build()
 
 	private val billingQueryResultChannel = BroadcastChannel<BillingQueryResult>(Channel.CONFLATED)
+	private val purchaseResultChannel = Channel<PurchaseResult>(Channel.CONFLATED)
 
 	init {
 		Logger.log("billingClient start connection")
@@ -51,12 +51,15 @@ class BillingManager(
 		val flowParams = BillingFlowParams.newBuilder()
 			.setSkuDetails(skuDetails)
 			.build()
-		val responseCode = billingClient.launchBillingFlow(activity, flowParams)
-		return flowOf(PurchaseResult.Fail)
+
+		val billingResult = billingClient.launchBillingFlow(activity, flowParams)
+		return purchaseResultChannel.consumeAsFlow()
 	}
 
 	override fun onPurchasesUpdated(billingResult: BillingResult?, purchases: MutableList<Purchase>?) {
-
+		val isSuccess = billingResult?.responseCode == BillingClient.BillingResponseCode.OK ||
+				billingResult?.responseCode == BillingClient.BillingResponseCode.ITEM_ALREADY_OWNED
+		purchaseResultChannel.offer(if (isSuccess) PurchaseResult.Success else PurchaseResult.Fail)
 	}
 
 	private fun queryPurchases() {

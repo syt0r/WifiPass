@@ -10,17 +10,19 @@ import java.util.concurrent.Executors
 
 class CommandExecutor : CommandExecutorContract.CommandExecutor {
 
-	val executorsPool = Executors.newFixedThreadPool(2)
+	private val executorsPool = Executors.newFixedThreadPool(2)
 		.asCoroutineDispatcher()
 
+	//TODO implement timeout
+
 	@Throws(Exception::class)
-	override suspend fun execCommand(command: String): String {
-		return execCommand(command, 2000)
+	override suspend fun execCommand(cmdArray: Array<String>): String {
+		return execCommand(cmdArray, 2000)
 	}
 
 	@Throws(Exception::class)
-	override suspend fun execCommand(command: String, timeout: Long): String {
-		val process = Runtime.getRuntime().exec(command)
+	override suspend fun execCommand(cmdArray: Array<String>, timeout: Long): String {
+		val process = Runtime.getRuntime().exec(cmdArray)
 
 		val output = withContext(executorsPool) { getStreamOutput(process.inputStream) }
 		val error = withContext(executorsPool) { getStreamOutput(process.errorStream) }

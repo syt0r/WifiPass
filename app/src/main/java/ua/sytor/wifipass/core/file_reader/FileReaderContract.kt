@@ -5,9 +5,6 @@ interface FileReaderContract {
     interface FileReader {
 
         @Throws(Exception::class)
-        suspend fun checkIsFileExists(filePath: String, su: Boolean): Boolean
-
-        @Throws(Exception::class)
         suspend fun readFileContents(filePath: String, su: Boolean): String
 
     }

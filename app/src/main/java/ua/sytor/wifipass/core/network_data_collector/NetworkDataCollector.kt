@@ -33,7 +33,10 @@ class NetworkDataCollector(
 
 	private suspend fun isRooted(): Boolean {
 		return try {
-			commandExecutor.execCommand("su -c ls", 1000)
+			commandExecutor.execCommand(
+				cmdArray = arrayOf("su", "-c", "ls"),
+				timeout = 1000
+			)
 			true
 		} catch (e: Exception) {
 			false
@@ -43,7 +46,7 @@ class NetworkDataCollector(
 	private suspend fun isConfigurationFileExists(path: String): Boolean {
 		return try {
 			val output = commandExecutor.execCommand(
-				command = "su -c test -e $path && echo 1 || echo 0",
+				cmdArray = arrayOf("su", "-c", "test -e $path && echo 1 || echo 0"),
 				timeout = 1000
 			)
 			output.contains("1")
@@ -54,7 +57,7 @@ class NetworkDataCollector(
 
 	private suspend fun readFileContent(path: String): String? {
 		return commandExecutor.execCommand(
-			command = "su -c cat $path",
+			cmdArray = arrayOf("su", "-c", "cat $path"),
 			timeout = 1000
 		)
 	}

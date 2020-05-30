@@ -25,7 +25,7 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_gravity="center"
-                android:src="@drawable/web_hi_res_512" />
+                android:src="@mipmap/ic_launcher_round" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -47,7 +47,17 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/about_screen_description" />
+                android:gravity="center"
+                android:text="@string/about_screen_root_note"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/about_screen_description"
+                android:textSize="16sp" />
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -59,7 +69,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="20dp"
                     android:layout_weight="1"
-                    android:text="@string/about_screen_source_code" />
+                    android:text="@string/about_screen_source_code"
+                    android:textSize="16sp" />
 
                 <Button
                     android:id="@+id/sourceCodeButton"
@@ -82,7 +93,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="20dp"
                     android:layout_weight="1"
-                    android:text="@string/about_screen_donate_message" />
+                    android:text="@string/about_screen_donate_message"
+                    android:textSize="16sp" />
 
                 <Button
                     android:id="@+id/donateButton"

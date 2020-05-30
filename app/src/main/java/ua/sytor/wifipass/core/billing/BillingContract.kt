@@ -17,12 +17,12 @@ interface BillingContract {
 	}
 
 	sealed class PurchaseResult {
-		data class Success(val purchaseOptions: List<SkuDetails>) : PurchaseResult()
+		object Success : PurchaseResult()
 		object Fail : PurchaseResult()
 	}
 
 }
 
 val skuList = listOf(
-	"android.test.purchased"
+	"donation"
 )

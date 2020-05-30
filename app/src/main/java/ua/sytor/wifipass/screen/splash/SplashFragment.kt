@@ -2,11 +2,12 @@ package ua.sytor.wifipass.screen.splash
 
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.widget.Toast
+import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import kotlinx.android.synthetic.main.dialog_check_password.*
 import kotlinx.android.synthetic.main.dialog_check_password.view.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import ua.sytor.wifipass.R
@@ -35,8 +36,6 @@ class SplashFragment : Fragment() {
 			}
 
 			State.CheckFailed -> {
-				Toast.makeText(context, R.string.splash_screen_wrong_pass_message, Toast.LENGTH_LONG).show()
-				exitApp()
 			}
 		}
 	}
@@ -52,19 +51,30 @@ class SplashFragment : Fragment() {
 	}
 
 	private fun showPasswordCheckDialog() {
-		Logger.log("showPasswordCheckDialog")
 		val view = LayoutInflater.from(context).inflate(R.layout.dialog_check_password, null)
-		AlertDialog.Builder(requireContext(), R.style.AlertDialog)
+
+		val dialog = AlertDialog.Builder(requireContext(), R.style.AlertDialog)
 			.setTitle(R.string.check_password_dialog_title)
 			.setView(view)
-			.setCancelable(false)
-			.setPositiveButton(R.string.check_password_dialog_positive_button) { _, _ ->
-				viewModel.checkPassword(view.editText.text.toString())
+			.setPositiveButton(R.string.check_password_dialog_positive_button) { _, _ -> }
+			.setNegativeButton(R.string.check_password_dialog_negative_button) { _, _ -> }
+			.create()
+
+		val onPositiveClick: (View) -> Unit = {
+			val password = view.passwordEditText.text.toString()
+			val isValid = viewModel.checkPassword(password)
+			if (isValid) {
+				dialog.cancel()
+			} else {
+				dialog.passwordInputLayout.error = it.context.getString(R.string.check_password_error_text)
+				view.passwordInputLayout.passwordEditText.setText("")
 			}
-			.setNegativeButton(R.string.check_password_dialog_negative_button) { _, _ ->
-				exitApp()
-			}
-			.show()
+		}
+
+		dialog.show()
+
+		dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(onPositiveClick)
+		dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setOnClickListener { exitApp() }
 	}
 
 	private fun exitApp() {

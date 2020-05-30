@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_about.*
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -35,11 +36,20 @@ class AboutScreenFragment : Fragment() {
 		}
 
 		viewModel.getPurchaseOptions()
+			.onEach { billingQueryResult ->
+				when (billingQueryResult) {
+					is BillingContract.BillingQueryResult.Success -> {
+						showDonationLayout(billingQueryResult)
+					}
+				}
+			}
+			.launchIn(lifecycleScope)
+
+		viewModel.purchaseResultsFlow()
 			.onEach {
 				when (it) {
-					is BillingContract.BillingQueryResult.Success -> {
-						showDonationLayout(it)
-					}
+					BillingContract.PurchaseResult.Success -> notifyPurchaseSuccess()
+					BillingContract.PurchaseResult.Fail -> notifyPurchaseFailed()
 				}
 			}
 			.launchIn(lifecycleScope)
@@ -51,6 +61,14 @@ class AboutScreenFragment : Fragment() {
 		donateButton.setOnClickListener {
 			viewModel.makePurchase(requireActivity(), response.purchaseOptions.first())
 		}
+	}
+
+	private fun notifyPurchaseSuccess() {
+		Snackbar.make(requireView(), R.string.about_screen_purchase_success, Snackbar.LENGTH_LONG).show()
+	}
+
+	private fun notifyPurchaseFailed() {
+		Snackbar.make(requireView(), R.string.about_screen_purchase_fail, Snackbar.LENGTH_LONG).show()
 	}
 
 }

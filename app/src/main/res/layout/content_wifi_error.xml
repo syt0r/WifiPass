@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    tools:showIn="@layout/fragment_wifi">
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginBottom="40dp"
+        android:src="@drawable/ic_error" />
+
+    <TextView
+        android:id="@+id/errorText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:maxWidth="200dp"
+        android:maxLines="3"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        tools:text="@string/wifi_screen_no_root" />
+
+    <Button
+        android:id="@+id/retryButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:drawableEnd="@drawable/ic_retry"
+        android:gravity="center"
+        android:maxWidth="200dp"
+        android:text="@string/wifi_screen_retry"
+        android:textSize="16sp" />
+
+</LinearLayout>

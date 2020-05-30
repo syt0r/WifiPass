@@ -12,6 +12,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import kotlinx.android.synthetic.main.content_wifi_error.view.*
+import kotlinx.android.synthetic.main.content_wifi_list.view.*
 import kotlinx.android.synthetic.main.dialog_set_password.view.*
 import kotlinx.android.synthetic.main.fragment_wifi.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -39,6 +41,8 @@ class WifiScreenFragment : Fragment() {
 			}
 			is State.Loading -> {
 				disableRawSourceButton()
+				hideError()
+				hideNetworksList()
 				showLoading()
 			}
 			is State.Loaded -> {
@@ -90,7 +94,7 @@ class WifiScreenFragment : Fragment() {
 			)
 		}
 
-		recyclerView.apply {
+		contentList.recyclerView.apply {
 			layoutManager = LinearLayoutManager(context)
 			adapter = this@WifiScreenFragment.adapter
 		}
@@ -99,44 +103,44 @@ class WifiScreenFragment : Fragment() {
 			showDropdownMenu(dropdownView, wifi)
 		}
 
-		retryButton.setOnClickListener {
+		contentError.retryButton.setOnClickListener {
 			viewModel.loadData()
 		}
 	}
 
 	private fun showLoading() {
 		Logger.log("showLoading")
-		progressBar.visibility = View.VISIBLE
-		recyclerView.visibility = View.INVISIBLE
-		retryButton.visibility = View.GONE
-		errorText.visibility = View.GONE
+		contentLoading.visibility = View.VISIBLE
 		toolbar.menu.findItem(R.id.raw_config).isEnabled = false
 	}
 
 	private fun hideLoading() {
 		Logger.log("dismissLoading")
-		progressBar.visibility = View.GONE
+		contentLoading.visibility = View.GONE
 	}
 
 	private fun showNetworksList(data: List<WifiNetworkData>) {
-		recyclerView.visibility = View.VISIBLE
-		adapter.setData(data)
+		if (data.isEmpty()) {
+			contentEmptyList.visibility = View.VISIBLE
+		} else {
+			contentList.visibility = View.VISIBLE
+			adapter.setData(data)
+		}
 	}
 
 	private fun hideNetworksList() {
-		recyclerView.visibility = View.INVISIBLE
+		contentList.visibility = View.INVISIBLE
+		contentEmptyList.visibility = View.GONE
 	}
 
 	private fun showError(message: String) {
 		Logger.log("showError message[$message]")
-		errorText.text = message
-		errorText.visibility = View.VISIBLE
-		retryButton.visibility = View.VISIBLE
+		contentError.errorText.text = message
+		contentError.visibility = View.VISIBLE
 	}
 
 	private fun hideError() {
-		errorText.visibility = View.GONE
-		retryButton.visibility = View.GONE
+		contentError.visibility = View.GONE
 	}
 
 	private fun enableRawSourceButton() {
@@ -179,14 +183,33 @@ class WifiScreenFragment : Fragment() {
 
 	private fun showSetPasswordDialog() {
 		val view = LayoutInflater.from(context).inflate(R.layout.dialog_set_password, null)
-		AlertDialog.Builder(requireContext(), R.style.AlertDialog)
-			.setTitle(R.string.raw_config_dialog_title)
+
+		val dialog = AlertDialog.Builder(requireContext(), R.style.AlertDialog)
+			.setTitle(R.string.set_password_dialog_title)
 			.setView(view)
-			.setPositiveButton(R.string.set_password_dialog_positive_button) { _, _ ->
-				viewModel.setNewPassword(view.editText.text.toString())
-			}
+			.setPositiveButton(R.string.set_password_dialog_positive_button) { _, _ -> }
 			.setNegativeButton(R.string.set_password_dialog_negative_button) { _, _ -> }
-			.show()
+			.create()
+
+		val onPositiveClick: (View) -> Unit = {
+			val password = view.passwordEditText.text.toString()
+			if (isPasswordValid(password)) {
+				dialog.cancel()
+				viewModel.setNewPassword(password)
+			} else {
+				view.passwordInputLayout.error = it.context.getString(R.string.set_password_error_text)
+			}
+		}
+
+		dialog.show()
+
+		dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(onPositiveClick)
+		dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setOnClickListener { dialog.dismiss() }
+
+	}
+
+	private fun isPasswordValid(password: String): Boolean {
+		return password.isBlank() || password.length == 4
 	}
 
 }

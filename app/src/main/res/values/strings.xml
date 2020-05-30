@@ -5,8 +5,7 @@
     <string name="check_password_dialog_title">Enter password</string>
     <string name="check_password_dialog_positive_button">Check</string>
     <string name="check_password_dialog_negative_button">Cancel</string>
-
-    <string name="splash_screen_wrong_pass_message">Wrong password</string>
+    <string name="check_password_error_text">Wrong password</string>
 
     <!-- Wifi Screen -->
     <string name="wifi_screen_label">@string/app_name</string>
@@ -21,13 +20,15 @@
     <string name="wifi_screen_copied_to_clipboard">Copied to clipboard</string>
     <string name="wifi_screen_share_password">Share with</string>
 
-    <string name="wifi_screen_no_root">No root access</string>
+    <string name="wifi_screen_no_root">Couldn\'t get root access</string>
     <string name="wifi_screen_config_not_found">Configuration file not found</string>
     <string name="wifi_screen_unknown_failure">Unknown error: %1$s</string>
 
     <string name="wifi_screen_raw">View raw config</string>
     <string name="wifi_screen_set_password">View raw config</string>
     <string name="wifi_screen_about">About</string>
+
+    <string name="wifi_screen_no_wifi_found">No wi-fi networks with password found</string>
 
     <string name="popup_menu_copy">Copy</string>
     <string name="popup_menu_share">Share</string>
@@ -38,20 +39,27 @@
     <string name="set_password_dialog_title">Set new password</string>
     <string name="set_password_dialog_positive_button">Set</string>
     <string name="set_password_dialog_negative_button">Cancel</string>
-    <string name="set_password_dialog_hint">Leave empty to remove</string>
+    <string name="set_password_dialog_helper_text">Leave empty to remove</string>
+    <string name="set_password_dialog_hint">XXXX</string>
+    <string name="set_password_error_text">Enter 4 numbers or leave empty to disable password</string>
 
     <!-- About Screen -->
     <string name="about_screen_label">About</string>
 
     <string name="about_screen_version">Version: %s</string>
     <string name="about_screen_description">
-        View saved wi-fi passwords and share them with whom you want.\nPassword setup function is provided in the application for security.
+        View and share saved wi-fi passwords with Wifi Password
+        \nEasily share your passwords with everyone you want and use it to remind yourself a passwords you might forgot
+        \nUse password feature to set PIN-code for app to ensure security
     </string>
+    <string name="about_screen_root_note">Requires root access</string>
 
     <string name="about_screen_source_code">Source code:</string>
     <string name="about_screen_github">Github</string>
     <string name="about_screen_donate_message">Want to support?</string>
     <string name="about_screen_donate_button">Donate now</string>
 
+    <string name="about_screen_purchase_success">Thanks!</string>
+    <string name="about_screen_purchase_fail">Donation failed</string>
 
 </resources>

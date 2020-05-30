@@ -1,71 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:animateLayoutChanges="true">
+    android:animateLayoutChanges="true"
+    android:orientation="vertical">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
-        app:layout_constraintBottom_toTopOf="@id/recyclerView"
-        app:layout_constraintTop_toTopOf="parent"
         app:menu="@menu/wifi_screen_toolbar" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar"
-        tools:listitem="@layout/adapter_wifi_item" />
+        android:layout_weight="1"
+        android:animateLayoutChanges="true">
 
-    <ProgressBar
-        android:id="@+id/progressBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:indeterminateTint="?iconColor"
-        app:layout_constraintBottom_toBottomOf="@id/recyclerView"
-        app:layout_constraintEnd_toEndOf="@id/recyclerView"
-        app:layout_constraintStart_toStartOf="@id/recyclerView"
-        app:layout_constraintTop_toTopOf="@id/recyclerView" />
+        <include
+            android:id="@+id/contentList"
+            layout="@layout/content_wifi_list"
+            android:visibility="visible" />
 
-    <TextView
-        android:id="@+id/errorText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:gravity="center"
-        android:maxWidth="200dp"
-        android:textSize="16sp"
-        android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@id/retryButton"
-        app:layout_constraintEnd_toEndOf="@id/recyclerView"
-        app:layout_constraintStart_toStartOf="@id/recyclerView"
-        app:layout_constraintTop_toTopOf="@id/recyclerView"
-        app:layout_constraintVertical_chainStyle="packed"
-        tools:text="Long long long long Error Message Here" />
+        <include
+            android:id="@+id/contentLoading"
+            layout="@layout/content_wifi_loading"
+            android:visibility="gone" />
 
+        <include
+            android:id="@+id/contentEmptyList"
+            layout="@layout/content_wifi_empty_list"
+            android:visibility="gone" />
 
-    <Button
-        android:id="@+id/retryButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="4dp"
-        android:gravity="center"
-        android:maxWidth="200dp"
-        android:text="@string/wifi_screen_retry"
-        android:textSize="16sp"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@id/recyclerView"
-        app:layout_constraintEnd_toEndOf="@id/recyclerView"
-        app:layout_constraintStart_toStartOf="@id/recyclerView"
-        app:layout_constraintTop_toBottomOf="@id/errorText"
-        app:layout_constraintVertical_chainStyle="packed" />
+        <include
+            android:id="@+id/contentError"
+            layout="@layout/content_wifi_error"
+            android:visibility="gone" />
 
+    </FrameLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

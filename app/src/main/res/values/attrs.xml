@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <attr name="iconColor" format="color|reference" />
+    <attr name="adaptiveIconColor" format="color|reference" />
+    <attr name="adaptiveIconInvertedColor" format="color|reference" />
 
 </resources>
