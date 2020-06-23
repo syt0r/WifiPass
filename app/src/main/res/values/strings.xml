@@ -59,6 +59,8 @@
     <string name="about_screen_donate_message">Want to support?</string>
     <string name="about_screen_donate_button">Donate now</string>
 
+    <string name="about_screen_chooser_text">Open with</string>
+
     <string name="about_screen_purchase_success">Thanks!</string>
     <string name="about_screen_purchase_fail">Donation failed</string>
 

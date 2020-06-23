@@ -6,7 +6,6 @@ import org.koin.core.context.startKoin
 import org.koin.core.module.Module
 import ua.sytor.wifipass.core.billing.di.billingModule
 import ua.sytor.wifipass.core.command_executer.di.commandExecutorModule
-import ua.sytor.wifipass.core.file_reader.di.fileReaderModule
 import ua.sytor.wifipass.core.network_data_collector.di.networkDataCollectorModule
 import ua.sytor.wifipass.repository.password.di.passwordRepositoryModule
 import ua.sytor.wifipass.screen.about.di.aboutScreenModule
@@ -25,12 +24,11 @@ class KoinDependencies {
 		private val coreModules = setOf(
 			billingModule,
 			commandExecutorModule,
-			fileReaderModule,
 			networkDataCollectorModule,
 			useCaseModule
 		)
 
-		private val screens = setOf(
+		private val screenModules = setOf(
 			aboutScreenModule,
 			splashScreenModule,
 			wifiScreenModule
@@ -39,7 +37,7 @@ class KoinDependencies {
 		private val modules = setOf<Module>()
 			.union(repositories)
 			.union(coreModules)
-			.union(screens)
+			.union(screenModules)
 
 		fun inject(application: Application) {
 			startKoin {
