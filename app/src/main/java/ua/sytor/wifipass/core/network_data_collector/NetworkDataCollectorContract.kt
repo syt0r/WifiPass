@@ -37,5 +37,6 @@ data class ConfigOptions(val parser: Parser)
 
 val configs = mapOf(
 	"/data/misc/wifi/wpa_supplicant.conf" to ConfigOptions(WpaSupplicantParser()),
-	"/data/misc/wifi/WifiConfigStore.xml" to ConfigOptions(WifiConfigStoreParser())
+	"/data/misc/wifi/WifiConfigStore.xml" to ConfigOptions(WifiConfigStoreParser()),
+	"/data/misc/apexdata/com.android.wifi/WifiConfigStore.xml" to ConfigOptions(WifiConfigStoreParser())
 )
